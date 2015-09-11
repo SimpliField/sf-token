@@ -204,6 +204,25 @@ describe('TokenService', function () {
         }, /E_NO_END_OF_LIFE/);
       });
 
+      it('with no contents', function () {
+        _assert2['default'].throws(function () {
+          tokenService.checkToken({
+            _id: createObjectId(),
+            endOfLife: time() + 1
+          }, 'hash');
+        }, /E_NO_CONTENT/);
+      });
+
+      it('with no hash', function () {
+        _assert2['default'].throws(function () {
+          tokenService.checkToken({
+            _id: createObjectId(),
+            contents: {},
+            endOfLife: time() + 1
+          });
+        }, /E_NO_HASH/);
+      });
+
       it('with a bad hash', function () {
         _assert2['default'].throws(function () {
           tokenService.checkToken({

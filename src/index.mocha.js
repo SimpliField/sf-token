@@ -74,7 +74,7 @@ describe('TokenService', () => {
           uniqueId: createObjectId,
           time: 'time',
         });
-      }, /E_BAD_time/);
+      }, /E_BAD_TIME/);
     });
 
     it('should fail with a bad algorithm', () => {
