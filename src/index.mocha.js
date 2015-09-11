@@ -193,6 +193,25 @@ describe('TokenService', () => {
         }, /E_NO_END_OF_LIFE/);
       });
 
+      it('with no contents', () => {
+        assert.throws(() => {
+          tokenService.checkToken({
+            _id: createObjectId(),
+            endOfLife: time() + 1,
+          }, 'hash');
+        }, /E_NO_CONTENT/);
+      });
+
+      it('with no hash', () => {
+        assert.throws(() => {
+          tokenService.checkToken({
+            _id: createObjectId(),
+            contents: {},
+            endOfLife: time() + 1,
+          });
+        }, /E_NO_HASH/);
+      });
+
       it('with a bad hash', () => {
         assert.throws(() => {
           tokenService.checkToken({
