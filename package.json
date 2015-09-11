@@ -8,8 +8,8 @@
     "lint": "eslint src/*.js",
     "compile": "babel src --out-dir=dist",
     "prepublish": "npm run compile && npm test && npm run lint",
-    "coveralls": "istanbul cover _mocha --report lcovonly -- --compilers js:babel/register  src/*.mocha.js -R spec -t 5000 && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
-    "cover": "istanbul cover --report html _mocha -- src/*.mocha.js -R spec -t 5000",
+    "coveralls": "istanbul cover _mocha --report lcovonly -- --compilers js:babel/register src/*.mocha.js -R spec -t 5000 && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
+    "cover": "istanbul cover --report html _mocha -- --compilers js:babel/register src/*.mocha.js -R spec -t 5000",
     "cli": "env NPM_RUN_CLI=1"
   },
   "engines": {
