@@ -2,7 +2,7 @@
   "name": "sf-token",
   "version": "0.0.0",
   "description": "Service for creating and checking temporary tokens.",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "mocha --compilers js:babel/register src/*.mocha.js",
     "lint": "eslint src/*.js",
