@@ -112,7 +112,7 @@ describe('TokenService', () => {
         }, time() + 3600000),
         {
           _id: id,
-          hash: '248b2e12cb4d4adc3ffae6408e962d2ea7c08569bc270fe535fe0f0ad1c31eef',
+          hash: '998788d55111d1122e8fa20e1ddb9bead2f638a9816391b62bb4549fecf4ebd6',
           endOfLife: time() + 3600000,
           contents: {
             method: 'DELETE',
@@ -228,7 +228,7 @@ describe('TokenService', () => {
             _id: createObjectId(),
             contents: {},
             endOfLife: time() - 1,
-          }, '54aeec457ab8eff27be5a198ef872a14f8b29468931da1516261fcb55b8493ce');
+          }, '5396c36217178319b5f25da626fda17d104ef57cc6e37124120ec93d6eeabc34');
         }, /E_PAST_END_OF_LIFE/);
       });
 

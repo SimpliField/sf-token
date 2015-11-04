@@ -41,7 +41,7 @@
     "mocha-lcov-reporter": "0.0.2",
     "mockery": "^1.4.0",
     "neatequal": "^1.0.0",
-    "objectid-stub": "^1.1.0",
+    "objectid-stub": "^1.3.0",
     "sf-time-mock": "^1.0.1",
     "streamtest": "^1.2.1"
   },
