@@ -1,7 +1,10 @@
 {
   "extends": "eslint-config-simplifield",
+  "parserOptions": {
+    "sourceType": "module"
+  },
   "env": {
-  "es6": true,
+    "es6": true,
     "node": true,
     "mocha": true
   },
@@ -17,7 +20,8 @@
     "module": false
   },
   "rules": {
-    "strict": [2, "global"]
+    "strict": [2, "global"],
+    "no-magic-numbers": 0,
   },
   "ecmaFeatures": {
     "arrowFunctions": true,
