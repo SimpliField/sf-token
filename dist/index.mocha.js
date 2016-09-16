@@ -1,8 +1,4 @@
-/* eslint max-nested-callbacks:[1] */
-
 'use strict';
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _assert = require('assert');
 
@@ -24,8 +20,11 @@ var _index = require('./index');
 
 var _index2 = _interopRequireDefault(_index);
 
-var time = (0, _sfTimeMock2['default'])();
-var createObjectId = (0, _objectidStub2['default'])();
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var time = (0, _sfTimeMock2.default)(); /* eslint max-nested-callbacks:[1] */
+
+var createObjectId = (0, _objectidStub2.default)();
 
 describe('TokenService', function () {
 
@@ -37,14 +36,14 @@ describe('TokenService', function () {
   describe('constructor()', function () {
 
     it('should work with required options only', function () {
-      new _index2['default']({
+      new _index2.default({
         secret: 'mysecret',
         uniqueId: createObjectId
       });
     });
 
     it('should work with all options', function () {
-      new _index2['default']({
+      new _index2.default({
         secret: 'mysecret',
         uniqueId: createObjectId,
         time: time,
@@ -53,16 +52,16 @@ describe('TokenService', function () {
     });
 
     it('should fail if no unique id generator is given', function () {
-      _assert2['default'].throws(function () {
-        new _index2['default']({
+      _assert2.default.throws(function () {
+        new _index2.default({
           secret: 'mysecret'
         });
       }, /E_NO_ID_GENERATOR/);
     });
 
     it('should fail with a bad unique id generator', function () {
-      _assert2['default'].throws(function () {
-        new _index2['default']({
+      _assert2.default.throws(function () {
+        new _index2.default({
           secret: 'mysecret',
           uniqueId: 'id'
         });
@@ -70,14 +69,14 @@ describe('TokenService', function () {
     });
 
     it('should fail with no secret', function () {
-      _assert2['default'].throws(function () {
-        new _index2['default']({
+      _assert2.default.throws(function () {
+        new _index2.default({
           uniqueId: createObjectId,
           time: 'time'
         });
       }, /E_BAD_SECRET/);
-      _assert2['default'].throws(function () {
-        new _index2['default']({
+      _assert2.default.throws(function () {
+        new _index2.default({
           secret: 1664,
           uniqueId: createObjectId,
           time: 'time'
@@ -86,18 +85,18 @@ describe('TokenService', function () {
     });
 
     it('should fail with a bad time', function () {
-      _assert2['default'].throws(function () {
-        new _index2['default']({
+      _assert2.default.throws(function () {
+        new _index2.default({
           secret: 'mysecret',
           uniqueId: createObjectId,
           time: 'time'
         });
-      }, /E_BAD_time/);
+      }, /E_BAD_TIME/);
     });
 
     it('should fail with a bad algorithm', function () {
-      _assert2['default'].throws(function () {
-        new _index2['default']({
+      _assert2.default.throws(function () {
+        new _index2.default({
           secret: 'mysecret',
           uniqueId: createObjectId,
           time: time,
@@ -108,10 +107,10 @@ describe('TokenService', function () {
   });
 
   describe('createToken()', function () {
-    var tokenService = undefined;
+    var tokenService = void 0;
 
     beforeEach(function () {
-      tokenService = new _index2['default']({
+      tokenService = new _index2.default({
         secret: 'guestwhat',
         time: time,
         uniqueId: createObjectId
@@ -121,12 +120,12 @@ describe('TokenService', function () {
     it('should work as expected', function () {
       var id = createObjectId.next();
 
-      (0, _neatequal2['default'])(tokenService.createToken({
+      (0, _neatequal2.default)(tokenService.createToken({
         method: 'DELETE',
         uri: '/user/abbacacaabbacacaabbacaca/suscriptions/report_received'
       }, time() + 3600000), {
         _id: id,
-        hash: '248b2e12cb4d4adc3ffae6408e962d2ea7c08569bc270fe535fe0f0ad1c31eef',
+        hash: '998788d55111d1122e8fa20e1ddb9bead2f638a9816391b62bb4549fecf4ebd6',
         endOfLife: time() + 3600000,
         contents: {
           method: 'DELETE',
@@ -138,19 +137,19 @@ describe('TokenService', function () {
     describe('should fail', function () {
 
       it('with no content', function () {
-        _assert2['default'].throws(function () {
+        _assert2.default.throws(function () {
           tokenService.createToken();
         }, /E_NO_CONTENT/);
       });
 
       it('with no end of life', function () {
-        _assert2['default'].throws(function () {
+        _assert2.default.throws(function () {
           tokenService.createToken({});
         }, /E_NO_END_OF_LIFE/);
       });
 
       it('with past end of life', function () {
-        _assert2['default'].throws(function () {
+        _assert2.default.throws(function () {
           tokenService.createToken({}, time() - 1);
         }, /E_PAST_END_OF_LIFE/);
       });
@@ -158,10 +157,10 @@ describe('TokenService', function () {
   });
 
   describe('checkToken()', function () {
-    var tokenService = undefined;
+    var tokenService = void 0;
 
     beforeEach(function () {
-      tokenService = new _index2['default']({
+      tokenService = new _index2.default({
         secret: 'guestwhat',
         time: time,
         uniqueId: createObjectId
@@ -179,7 +178,7 @@ describe('TokenService', function () {
       };
       var hash = tokenService._createHash(envelope);
 
-      _assert2['default'].doesNotThrow(function () {
+      _assert2.default.doesNotThrow(function () {
         tokenService.checkToken(envelope, hash);
       });
     });
@@ -187,7 +186,7 @@ describe('TokenService', function () {
     describe('should fail', function () {
 
       it('with no content', function () {
-        _assert2['default'].throws(function () {
+        _assert2.default.throws(function () {
           tokenService.checkToken({
             endOfLife: time(),
             contents: {}
@@ -196,7 +195,7 @@ describe('TokenService', function () {
       });
 
       it('with no end of life', function () {
-        _assert2['default'].throws(function () {
+        _assert2.default.throws(function () {
           tokenService.checkToken({
             _id: createObjectId(),
             contents: {}
@@ -205,7 +204,7 @@ describe('TokenService', function () {
       });
 
       it('with no contents', function () {
-        _assert2['default'].throws(function () {
+        _assert2.default.throws(function () {
           tokenService.checkToken({
             _id: createObjectId(),
             endOfLife: time() + 1
@@ -214,7 +213,7 @@ describe('TokenService', function () {
       });
 
       it('with no hash', function () {
-        _assert2['default'].throws(function () {
+        _assert2.default.throws(function () {
           tokenService.checkToken({
             _id: createObjectId(),
             contents: {},
@@ -224,7 +223,7 @@ describe('TokenService', function () {
       });
 
       it('with a bad hash', function () {
-        _assert2['default'].throws(function () {
+        _assert2.default.throws(function () {
           tokenService.checkToken({
             _id: createObjectId(),
             contents: {},
@@ -234,12 +233,12 @@ describe('TokenService', function () {
       });
 
       it('with past end of life', function () {
-        _assert2['default'].throws(function () {
+        _assert2.default.throws(function () {
           tokenService.checkToken({
             _id: createObjectId(),
             contents: {},
             endOfLife: time() - 1
-          }, '54aeec457ab8eff27be5a198ef872a14f8b29468931da1516261fcb55b8493ce');
+          }, '5396c36217178319b5f25da626fda17d104ef57cc6e37124120ec93d6eeabc34');
         }, /E_PAST_END_OF_LIFE/);
       });
     });
