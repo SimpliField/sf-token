@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -44,10 +44,10 @@ var TokenService = function () {
    *   });
    */
   function TokenService(_ref) {
-    var secret = _ref.secret;
-    var uniqueId = _ref.uniqueId;
-    var time = _ref.time;
-    var algorithm = _ref.algorithm;
+    var secret = _ref.secret,
+        uniqueId = _ref.uniqueId,
+        time = _ref.time,
+        algorithm = _ref.algorithm;
 
     _classCallCheck(this, TokenService);
 
@@ -149,9 +149,9 @@ var TokenService = function () {
   }, {
     key: 'checkToken',
     value: function checkToken(_ref2, hash) {
-      var _id = _ref2._id;
-      var endOfLife = _ref2.endOfLife;
-      var contents = _ref2.contents;
+      var _id = _ref2._id,
+          endOfLife = _ref2.endOfLife,
+          contents = _ref2.contents;
 
       var timestamp = this.time();
       var computedHash = '';
@@ -189,9 +189,9 @@ var TokenService = function () {
   }, {
     key: '_createHash',
     value: function _createHash(_ref3) {
-      var _id = _ref3._id;
-      var endOfLife = _ref3.endOfLife;
-      var contents = _ref3.contents;
+      var _id = _ref3._id,
+          endOfLife = _ref3.endOfLife,
+          contents = _ref3.contents;
 
       return _crypto2.default.createHash(this.algorithm).update([_id, endOfLife, JSON.stringify(contents), this.secret].join(':')).digest('hex');
     }
@@ -207,3 +207,4 @@ var TokenService = function () {
 
 
 exports.default = TokenService;
+module.exports = exports['default'];
